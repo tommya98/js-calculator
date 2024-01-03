@@ -48,7 +48,7 @@ describe("계산기 앱 테스트", () => {
     checkDisplayValue("123");
   });
 
-  xit("1번째 숫자를 입력하고 연산자 버튼을 누르면 display에 연산자가 표시된다.", () => {
+  it("1번째 숫자를 입력하고 연산자 버튼을 누르면 display에 연산자가 표시된다.", () => {
     clickDigitButtons([1, 2, 3]);
     clickOperationButton("+");
     checkDisplayValue("123+");
