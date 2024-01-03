@@ -3,12 +3,18 @@ function App() {
   const $operations = document.querySelector(".operations");
   const $total = document.querySelector("#total");
 
+  const operators = {
+    "+": (first, second) => first + second,
+    "-": (first, second) => first - second,
+    X: (first, second) => first * second,
+    "/": (first, second) => Math.floor(first / second),
+  };
+
   const handleDigitClick = (e) => {
     if (!e.target.classList.contains("digit")) return;
     const currentTotal = $total.innerText;
     const newDigit = e.target.innerText;
-    $total.innerText =
-      currentTotal === "0" ? newDigit : currentTotal + newDigit;
+    updateDisplay(currentTotal === "0" ? newDigit : currentTotal + newDigit);
   };
 
   const handleOperationClick = (e) => {
@@ -22,28 +28,25 @@ function App() {
       calculate(currentTotal);
       return;
     }
-    $total.innerText = isOperationAgain
-      ? currentTotal.substr(0, currentTotal.length - 1) + newOperation
-      : currentTotal + newOperation;
+    updateDisplay(
+      isOperationAgain
+        ? currentTotal.substr(0, currentTotal.length - 1) + newOperation
+        : currentTotal + newOperation
+    );
   };
 
   const calculate = (expression) => {
     let result = 0;
-    if (expression.includes("+")) {
-      const [first, second] = expression.split("+");
-      result = parseInt(first) + parseInt(second);
-    } else if (expression.includes("-")) {
-      const [first, second] = expression.split("-");
-      result = parseInt(first) - parseInt(second);
-    } else if (expression.includes("X")) {
-      const [first, second] = expression.split("X");
-      result = parseInt(first) * parseInt(second);
-    } else if (expression.includes("/")) {
-      const [first, second] = expression.split("/");
-      result = Math.floor(parseInt(first) / parseInt(second));
+    for (const operator in operators) {
+      if (expression.includes(operator)) {
+        const [first, second] = expression.split(operator);
+        result = operators[operator](parseInt(first), parseInt(second));
+      }
     }
     $total.innerText = result;
   };
+
+  const updateDisplay = (value) => ($total.innerText = value);
 
   $digits.addEventListener("click", handleDigitClick);
   $operations.addEventListener("click", handleOperationClick);
