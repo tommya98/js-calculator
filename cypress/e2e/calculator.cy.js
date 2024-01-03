@@ -84,7 +84,7 @@ describe("계산기 앱 테스트", () => {
     calculate([1, 2, 3], "/", [4, 5, 6], "0");
   });
 
-  xit("AC버튼을 클릭하면 display에 0이 표시된다.", () => {
+  it("AC버튼을 클릭하면 display에 0이 표시된다.", () => {
     clickDigitButtons([1, 2, 3]);
     clickACButton();
     checkDisplayValue("0");

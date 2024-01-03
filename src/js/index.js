@@ -1,6 +1,7 @@
 function App() {
   const $digits = document.querySelector(".digits");
   const $operations = document.querySelector(".operations");
+  const $modifier = document.querySelector(".modifiers");
   const $total = document.querySelector("#total");
 
   const operators = {
@@ -50,6 +51,7 @@ function App() {
 
   $digits.addEventListener("click", handleDigitClick);
   $operations.addEventListener("click", handleOperationClick);
+  $modifier.addEventListener("click", () => updateDisplay("0"));
 }
 
 App();
