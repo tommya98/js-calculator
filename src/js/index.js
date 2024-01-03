@@ -15,7 +15,12 @@ function App() {
     if (!e.target.classList.contains("operation")) return;
     const currentTotal = $total.innerText;
     const newOperation = e.target.innerText;
-    $total.innerText = currentTotal + newOperation;
+    const isOperationAgain = isNaN(
+      parseInt(currentTotal[currentTotal.length - 1])
+    );
+    $total.innerText = isOperationAgain
+      ? currentTotal.substr(0, currentTotal.length - 1) + newOperation
+      : currentTotal + newOperation;
   };
 
   $digits.addEventListener("click", handleDigitClick);

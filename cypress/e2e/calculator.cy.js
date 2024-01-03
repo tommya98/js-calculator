@@ -54,14 +54,14 @@ describe("계산기 앱 테스트", () => {
     checkDisplayValue("123+");
   });
 
-  xit("연산자 버튼을 여러 번 누르면 display에 마지막 연산자만 표시된다.", () => {
+  it("연산자 버튼을 여러 번 누르면 display에 마지막 연산자만 표시된다.", () => {
     clickDigitButtons([1, 2, 3]);
     clickOperationButton("+");
     clickOperationButton("-");
     checkDisplayValue("123-");
   });
 
-  xit("2번째 숫자를 입력하면 display에 2번째 숫자를 누적하여 표시한다.", () => {
+  it("2번째 숫자를 입력하면 display에 2번째 숫자를 누적하여 표시한다.", () => {
     clickDigitButtons([1, 2, 3]);
     clickOperationButton("+");
     clickDigitButtons([4, 5, 6]);
