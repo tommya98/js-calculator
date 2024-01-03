@@ -18,9 +18,31 @@ function App() {
     const isOperationAgain = isNaN(
       parseInt(currentTotal[currentTotal.length - 1])
     );
+    if (newOperation === "=") {
+      calculate(currentTotal);
+      return;
+    }
     $total.innerText = isOperationAgain
       ? currentTotal.substr(0, currentTotal.length - 1) + newOperation
       : currentTotal + newOperation;
+  };
+
+  const calculate = (expression) => {
+    let result = 0;
+    if (expression.includes("+")) {
+      const [first, second] = expression.split("+");
+      result = parseInt(first) + parseInt(second);
+    } else if (expression.includes("-")) {
+      const [first, second] = expression.split("-");
+      result = parseInt(first) - parseInt(second);
+    } else if (expression.includes("X")) {
+      const [first, second] = expression.split("X");
+      result = parseInt(first) * parseInt(second);
+    } else if (expression.includes("/")) {
+      const [first, second] = expression.split("/");
+      result = Math.floor(parseInt(first) / parseInt(second));
+    }
+    $total.innerText = result;
   };
 
   $digits.addEventListener("click", handleDigitClick);
